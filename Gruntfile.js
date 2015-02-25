@@ -7,6 +7,7 @@ require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
     grunt.initConfig({
 
         pkg: grunt.file.readJSON('package.json'),
+
         watch: {
     		html: {
 		        files: ['index.html'],
@@ -31,20 +32,20 @@ require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
 		    }
 		},
 
-			cssmin: {
-			    build: {
-			        src: 'build/css/master.css',
-			        dest: 'build/css/master.css'
-			    }
-			},
+		cssmin: {
+			build: {
+			    src: 'build/css/master.css',
+			    dest: 'build/css/master.css'
+			}
+		},
 
-			sass: {
-			    build: {
-			        files: {
-			            'build/css/master.css': 'assets/sass/master.scss'
-			        }
+		sass: {
+			build: {
+			    files: {
+			        'build/css/master.css': 'assets/sass/master.scss'
 			    }
-			},
+			}
+		},
 
 		uglify: {
 		    build: {
@@ -53,6 +54,16 @@ require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
 		        }
 		    }
 		},
+
+		jshint: {
+      		files: ['Gruntfile.js', 'js/*.js'],
+      		options: {
+	        	globals: {  "$": false,
+	          				jQuery: false
+	        		},
+	        	ignore : ['js/onepage.js']
+      		}
+    	},
 
         htmlhint: {
 		    build: {
@@ -72,9 +83,11 @@ require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
 
 		}
     });
+	
+	grunt.loadNpmTasks('grunt-contrib-jshint');
 
-    grunt.registerTask('default', []);
-    grunt.registerTask('buildcss',  ['sass', 'cssc', 'cssmin']);
-    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.registerTask('default', ['jshint']);
+    grunt.registerTask('buildcss',  ['sass', 'cssc', 'cssmin', 'jshint']);
+   
 
 };
