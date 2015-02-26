@@ -1,4 +1,4 @@
-
+'use strict';
 
 module.exports = function(grunt){
 
@@ -14,7 +14,7 @@ require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
 		        tasks: ['htmlhint']
     			},
     		js: {
-		        files: ['/js/validation.js'],
+		        files: ['/js/my-js/*.js'],
 		        tasks: ['uglify']
     		}
 		},
@@ -50,18 +50,18 @@ require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
 		uglify: {
 		    build: {
 		        files: {
-		            'build/js/base.min.js': ['/js/validation.js']
+		            'build/js/base.min.js': ['js/my-js/*.js']
 		        }
 		    }
 		},
 
 		jshint: {
-      		files: ['Gruntfile.js', 'js/*.js'],
-      		options: {
-	        	globals: {  "$": false,
-	          				jQuery: false
-	        		},
-	        	ignore : ['js/onepage.js']
+      		files: ['js/my-js/*.js'],
+      		options: { jshintrc: '.jshintrc',
+	        	globals: {  
+		           
+	        	},
+	        	ignores : []
       		}
     	},
 
@@ -86,8 +86,6 @@ require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
 	
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 
-    grunt.registerTask('default', ['jshint']);
-    grunt.registerTask('buildcss',  ['sass', 'cssc', 'cssmin', 'jshint']);
-   
-
+    grunt.registerTask('fairsource', ['jshint', 'uglify']);
+ 
 };
