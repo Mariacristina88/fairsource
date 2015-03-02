@@ -65,6 +65,25 @@ require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
       		}
     	},
 
+    	jsdoc : {
+	        dist : {
+	            src: ['js/my-js/*.js'],
+	            options: {
+	                destination: 'doc',
+	                
+	            }
+	        }
+	    },
+
+	    jasmine: { 
+		   src: 'js/my-js/*.js',
+		   options: { 
+		    specs: 'js/spec/*Spec.js',
+		    helpers: 'js/spec/*Helper.js',
+		    keepRunner : true
+		   }
+  		},
+
         htmlhint: {
 		    build: {
 		        options: {
@@ -85,7 +104,12 @@ require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
     });
 	
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-jsdoc');
+	grunt.loadNpmTasks('grunt-contrib-jasmine');
+	
 
-    grunt.registerTask('fairsource', ['jshint', 'uglify']);
+	grunt.registerTask('css', ['cssc', 'cssmin', 'sass']);
+	grunt.registerTask('html', ['htmlhint']);
+    grunt.registerTask('js', ['jshint','jsdoc', 'uglify','jsdoc', 'jasmine']);
  
 };
