@@ -38,7 +38,7 @@ var validate = function(){
 	var email = document.contactForm.femail;
 	var subject = document.contactForm.fsub;
 	var message = document.contactForm.fmessage;
-	var fields = ['fname', 'femail', 'fsub', 'fmessage'];
+	var fields = ['name', 'email', 'subject', 'message'];
 
 	
 	for (var i=0; i<fields.length; i++) {
@@ -47,7 +47,7 @@ var validate = function(){
 		console.log(field.value);
 		if(!stringNotEmpty(field.value)) {
 		errorCount++;
-		showError(document.contactForm[fields[i]], 'Please enter your' + fields[i]);
+		showError(document.contactForm[fields[i]], 'Please enter your' + ' ' + fields[i]);
 		}
 	}
 
