@@ -1,5 +1,5 @@
-# Grunt: The JavaScript Task Runner
-# Author: Maria Cristina Di Termine
+## Grunt: The JavaScript Task Runner
+## Author: Maria Cristina Di Termine
 
 An implementation exemple of Grunt and different plugin such as JSHint, Sass, HTMLHint.
 
